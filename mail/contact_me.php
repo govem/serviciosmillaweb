@@ -1,7 +1,7 @@
 <?php
 
 switch ($_SERVER['HTTP_ORIGIN']) {
-    case 'http://www.serviciosmilla.cl': case 'https://www.serviciosmilla.cl':
+    case 'http://serviciosmilla.cl': case 'https://serviciosmilla.cl':
     header('Access-Control-Allow-Origin: '.$_SERVER['HTTP_ORIGIN']);
     header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
     header('Access-Control-Max-Age: 1000');
