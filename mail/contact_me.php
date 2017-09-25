@@ -35,18 +35,34 @@ $headers .= "Reply-To: $email_address";
 //mail($to,$email_subject,$email_body,$headers);
 //return true;         
 
-$from = new SendGrid\Email(null, $email_address);
-$subject = $email_subject;
-$to = new SendGrid\Email(null, $to);
-$content = new SendGrid\Content("text/plain", $email_body);
-$mail = new SendGrid\Mail($from, $subject, $to, $content);
+$request_body = json_decode('{
+  "personalizations": [
+    {
+      "to": [
+        {
+          "email": $to
+        }
+      ],
+      "subject": $email_subject
+    }
+  ],
+  "from": {
+    "email": $email_address
+  },
+  "content": [
+    {
+      "type": "text/plain",
+      "value": $email_body
+    }
+  ]
+}');
 
 $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
 
-$response = $sg->client->mail()->send()->post($mail);
+$response = $sg->client->mail()->send()->post($request_body);
 echo $response->statusCode();
-echo $response->headers();
 echo $response->body();
+echo $response->headers();
 return true;
 ?>
