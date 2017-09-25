@@ -22,6 +22,7 @@ $(function() {
       $.ajax({
         url: "https://serviciosmillaweb.herokuapp.com/mail/contact_me.php",
         type: "POST",
+        crossDomain: true,
         data: {
           name: name,
           phone: phone,
