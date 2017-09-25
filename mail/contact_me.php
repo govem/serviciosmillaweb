@@ -1,5 +1,5 @@
 <?php
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 
 switch ($_SERVER['HTTP_ORIGIN']) {
     case 'http://serviciosmilla.cl': case 'https://serviciosmilla.cl':
