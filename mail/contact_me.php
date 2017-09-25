@@ -58,7 +58,7 @@ $request_body = json_decode('{
 }');
 
 $apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$sg = new \SendGrid\Client($apiKey);
 
 $response = $sg->client->mail()->send()->post($request_body);
 echo $response->statusCode();
