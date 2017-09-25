@@ -1,6 +1,4 @@
 <?php
-namespace SendGrid;
-
 require '../vendor/autoload.php';
 
 switch ($_SERVER['HTTP_ORIGIN']) {
