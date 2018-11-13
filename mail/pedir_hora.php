@@ -1,5 +1,5 @@
 <?php
-require '../vendor/autoload.php';
+require("../libs/sendgrid-php/sendgrid-php.php");
 
 switch ($_SERVER['HTTP_ORIGIN']) {
     case 'http://serviciosmilla.cl': case 'https://serviciosmilla.cl':
