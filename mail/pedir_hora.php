@@ -9,6 +9,7 @@ switch ($_SERVER['HTTP_ORIGIN']) {
 }
    
 $name = strip_tags(htmlspecialchars($_POST['name']));
+$rut = strip_tags(htmlspecialchars($_POST['rut']));
 $direccion = strip_tags(htmlspecialchars($_POST['direccion']));
 $correo = strip_tags(htmlspecialchars($_POST['correo']));
 $marca = strip_tags(htmlspecialchars($_POST['marca']));
@@ -17,7 +18,7 @@ $actividad = strip_tags(htmlspecialchars($_POST['actividad']));
 $otro = strip_tags(htmlspecialchars($_POST['otro']));
    
 // Create the email and send the message
-$to = 'gonzalo.vega@gmail.com'; 
+$to = 'serviciosmilla@gmail.com'; 
 $email_subject = "SOLICITUD DE HORA";
 $email_body = "Tienes una nueva solicitude de hora desde el sitio web.\n\n".
 "Aquí están los detalles:\n\n".
@@ -29,7 +30,7 @@ $email_body = "Tienes una nueva solicitude de hora desde el sitio web.\n\n".
 "Marca: $marca\n\n".
 "Actividad: $actividad\n\n".
 "Actividad (otro): $otro\n\n".
-$headers = "From: noreply@serviciosmilla.cl\n"; 
+$headers = "From: formulario@serviciosmilla.cl\n"; 
 $headers .= "Reply-To: $correo";  
 
 $salida = mail($to, $email_subject, $email_body, $headers);
