@@ -34,41 +34,23 @@ $email_body = "Tienes una nueva solicitude de hora desde el sitio web.\n\n".
 "Actividad (otro): $otro\n\n".
 $headers = "From: noreply@serviciosmilla.cl\n"; // This is the email address the generated message will be from. We recommend using something like noreply@yourdomain.com.
 $headers .= "Reply-To: $correo";  
-$headers .= "Content-type:application/json";
 //mail($to,$email_subject,$email_body,$headers);
 //return true;         
 
-$request_body = json_decode('{
-  "personalizations": [
-    {
-      "to": [
-        {
-          "email": $to
-        }
-      ],
-      "subject": $email_subject
-    }
-  ],
-  "from": {
-    "email": $email_address
-  },
-  "content": [
-    {
-      "type": "text/plain",
-      "value": $email_body
-    }
-  ]
-}');
 
-$apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+$email = new \SendGrid\Mail\Mail(); 
+$email->setFrom($correo, $correo);
+$email->setSubject($email_subject);
+$email->addTo("gonzalo.vega@gmail.com", "Example User");
+$email->addContent("text/plain", $email_body);
+$sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
+try {
+    $response = $sendgrid->send($email);
+    file_put_contents("php://stderr", "Status code: " . $response->statusCode() . "\n");
+    file_put_contents("php://stderr", "Body: " . $response->body() . "\n");
+} catch (Exception $e) {
+    file_put_contents("php://stderr", "Status code: " . $e->getMessage . "\n");
+}
 
-$response = $sg->client->mail()->send()->post($request_body);
-file_put_contents("php://stderr", "Status code: " . $response->statusCode() . "\n");
-file_put_contents("php://stderr", "Body: " . $response->body() . "\n");
-
-echo $response->statusCode();
-echo $response->body();
-echo $response->headers();
 return true;
 ?>
