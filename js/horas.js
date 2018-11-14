@@ -45,7 +45,8 @@ $('input,select')
           alert('Su hora ha sido enviada, nos pondremos en contacto con usted a la brevedad posible')
           window.location.href = 'index.html'
         },
-        error: function(err) {
+        error: function(xhr, status, error) {
+          var err = eval('(' + xhr.responseText + ')')
           alert('Surgió un error enviando su solicitud, favor reintente')
         }
       })
