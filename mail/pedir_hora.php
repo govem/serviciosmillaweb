@@ -32,6 +32,10 @@ $email_body = "Tienes una nueva solicitude de hora desde el sitio web.\n\n".
 $headers = "From: noreply@serviciosmilla.cl\n"; 
 $headers .= "Reply-To: $correo";  
 
-return mail($to, $email_subject, $email_body, $headers);
+$salida = mail($to, $email_subject, $email_body, $headers);
+file_put_contents("php://stderr", "salida mail: $salida\n");
 
+
+
+return true
 ?>
