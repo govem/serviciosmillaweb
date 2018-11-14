@@ -46,9 +46,11 @@ $httpClient = new GuzzleAdapter(new Client());
 $sparky = new SparkPost($httpClient, ['key'=>getEnv('SPARKPOST_API_KEY')]);
 
 $sparky->setOptions(['async' => false]);
+file_put_contents("php://stderr", "sparky: " . $sparky . "\n");
+file_put_contents("php://stderr", "transmission: " . $sparky->transmission . "\n");
 $response = $sparky->transmission->post([
   'options' => [
-    'sandbox' => true
+    'sandbox' => false
   ],
   'content' => [
     'from'=>$correo,
