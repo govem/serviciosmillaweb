@@ -62,6 +62,8 @@ $apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
 
 $response = $sg->client->mail()->send()->post($request_body);
+file_put_contents("php://stderr", "Status code: " . $response->statusCode() . "\n");
+
 echo $response->statusCode();
 echo $response->body();
 echo $response->headers();
