@@ -63,6 +63,7 @@ $sg = new \SendGrid($apiKey);
 
 $response = $sg->client->mail()->send()->post($request_body);
 file_put_contents("php://stderr", "Status code: " . $response->statusCode() . "\n");
+file_put_contents("php://stderr", "Body: " . $response->body() . "\n");
 
 echo $response->statusCode();
 echo $response->body();
