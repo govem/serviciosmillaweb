@@ -32,7 +32,8 @@ $email_body = "Tienes una nueva solicitude de hora desde el sitio web.\n\n".
 "Actividad: $actividad\n\n".
 "Actividad (otro): $otro\n\n".
 $headers = "From: noreply@serviciosmilla.cl\n"; // This is the email address the generated message will be from. We recommend using something like noreply@yourdomain.com.
-$headers .= "Reply-To: $correo";   
+$headers .= "Reply-To: $correo";  
+$headers .= "Content-type:application/json";
 //mail($to,$email_subject,$email_body,$headers);
 //return true;         
 
