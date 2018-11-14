@@ -25,7 +25,7 @@ $('input,select')
       var actividad = $('#horaForm #actividad').val()
       var otro = $('#horaForm #otro').val()
       $.ajax({
-        url: 'http://52.25.89.134/serviciosmilla/mail/pedir_hora.php',
+        url: 'http://34.220.31.60/serviciosmilla/mail/pedir_hora.php',
         //url: 'https://serviciosmillaweb.herokuapp.com/mail/pedir_hora.php',
         //url: 'http://localhost:9000/mail/pedir_hora.php',
         type: 'POST',

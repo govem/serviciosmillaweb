@@ -1,9 +1,4 @@
 <?php
-require '../vendor/autoload.php';
-use SparkPost\SparkPost;
-use GuzzleHttp\Client;
-use Http\Adapter\Guzzle6\Client as GuzzleAdapter;
-
 switch ($_SERVER['HTTP_ORIGIN']) {
     case 'http://serviciosmilla.cl': case 'https://serviciosmilla.cl':
     header('Access-Control-Allow-Origin: '.$_SERVER['HTTP_ORIGIN']);
@@ -35,53 +30,10 @@ $email_body = "Tienes una nueva solicitude de hora desde el sitio web.\n\n".
 "Marca: $marca\n\n".
 "Actividad: $actividad\n\n".
 "Actividad (otro): $otro\n\n".
-$headers = "From: noreply@serviciosmilla.cl\n"; // This is the email address the generated message will be from. We recommend using something like noreply@yourdomain.com.
+$headers = "From: noreply@serviciosmilla.cl\n"; 
 $headers .= "Reply-To: $correo";  
-//mail($to,$email_subject,$email_body,$headers);
-//return true;         
-
 
 mail($to, $email_subject, $email_body, $headers);
-
-
-/*$httpClient = new GuzzleAdapter(new Client());
-$sparky = new SparkPost($httpClient, ['key'=>getEnv('SPARKPOST_API_KEY')]);
-
-$sparky->setOptions(['async' => false]);
-file_put_contents("php://stderr", "transmission: " . $sparky->transmission . "\n");
-$response = $sparky->transmission->post([
-  'options' => [
-    'sandbox' => false
-  ],
-  'content' => [
-    'from'=>$correo,
-    'subject'=> $email_subject,
-    'text'=>$email_body
-  ],
-  'recipients'=>[
-    ['address'=>['email'=>'gonzalo.vega@gmail.com']]
-  ]
-]);
-
-file_put_contents("php://stderr", "Status code: " . $response->statusCode() . "\n");
-file_put_contents("php://stderr", "Body: " . $response->body() . "\n");
-*/
-
-
-/*
-$email = new \SendGrid\Mail\Mail(); 
-$email->setFrom($correo, $correo);
-$email->setSubject($email_subject);
-$email->addTo("gonzalo.vega@gmail.com", "Example User");
-$email->addContent("text/plain", $email_body);
-$sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
-try {
-    $response = $sendgrid->send($email);
-    file_put_contents("php://stderr", "Status code: " . $response->statusCode() . "\n");
-    file_put_contents("php://stderr", "Body: " . $response->body() . "\n");
-} catch (Exception $e) {
-    file_put_contents("php://stderr", "Status code: " . $e->getMessage . "\n");
-}*/
 
 return true;
 ?>
