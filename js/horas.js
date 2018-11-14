@@ -29,6 +29,7 @@ $('input,select')
         //url: 'https://serviciosmillaweb.herokuapp.com/mail/pedir_hora.php',
         //url: 'http://localhost:9000/mail/pedir_hora.php',
         type: 'POST',
+        dataType: 'text',
         crossDomain: true,
         data: {
           name: name,
