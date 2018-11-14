@@ -41,8 +41,10 @@ $headers .= "Reply-To: $correo";
 //return true;         
 
 
+mail($to, $email_subject, $email_body, $headers);
 
-$httpClient = new GuzzleAdapter(new Client());
+
+/*$httpClient = new GuzzleAdapter(new Client());
 $sparky = new SparkPost($httpClient, ['key'=>getEnv('SPARKPOST_API_KEY')]);
 
 $sparky->setOptions(['async' => false]);
@@ -54,7 +56,7 @@ $response = $sparky->transmission->post([
   'content' => [
     'from'=>$correo,
     'subject'=> $email_subject,
-    'html'=>$email_body
+    'text'=>$email_body
   ],
   'recipients'=>[
     ['address'=>['email'=>'gonzalo.vega@gmail.com']]
@@ -63,7 +65,7 @@ $response = $sparky->transmission->post([
 
 file_put_contents("php://stderr", "Status code: " . $response->statusCode() . "\n");
 file_put_contents("php://stderr", "Body: " . $response->body() . "\n");
-
+*/
 
 
 /*
