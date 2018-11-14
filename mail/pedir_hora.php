@@ -1,5 +1,8 @@
 <?php
-require("../libs/sendgrid-php/sendgrid-php.php");
+require 'vendor/autoload.php';
+use SparkPost\SparkPost;
+use GuzzleHttp\Client;
+use Http\Adapter\Guzzle6\Client as GuzzleAdapter;
 
 switch ($_SERVER['HTTP_ORIGIN']) {
     case 'http://serviciosmilla.cl': case 'https://serviciosmilla.cl':
@@ -38,6 +41,31 @@ $headers .= "Reply-To: $correo";
 //return true;         
 
 
+
+$httpClient = new GuzzleAdapter(new Client());
+$sparky = new SparkPost($httpClient, ['key'=>getEnv('SPARKPOST_API_KEY')]);
+
+$sparky->setOptions(['async' => false]);
+$response = $sparky->transmission->post([
+  'options' => [
+    'sandbox' => true
+  ],
+  'content' => [
+    'from'=>$correo,
+    'subject'=> $email_subject,
+    'html'=>$email_body
+  ],
+  'recipients'=>[
+    ['address'=>['email'=>'gonzalo.vega@gmail.com']]
+  ]
+]);
+
+file_put_contents("php://stderr", "Status code: " . $response->statusCode() . "\n");
+file_put_contents("php://stderr", "Body: " . $response->body() . "\n");
+
+
+
+/*
 $email = new \SendGrid\Mail\Mail(); 
 $email->setFrom($correo, $correo);
 $email->setSubject($email_subject);
@@ -50,7 +78,7 @@ try {
     file_put_contents("php://stderr", "Body: " . $response->body() . "\n");
 } catch (Exception $e) {
     file_put_contents("php://stderr", "Status code: " . $e->getMessage . "\n");
-}
+}*/
 
 return true;
 ?>

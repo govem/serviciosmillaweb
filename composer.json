@@ -1,6 +1,8 @@
 {
   "require": {
-    "php": "^5.5.12",
-    "sendgrid/sendgrid": "~5.0.9"
+    "php": "^7.0",
+    "guzzlehttp/guzzle": "^6.3",
+    "php-http/guzzle6-adapter": "^1.1",
+    "sparkpost/sparkpost": "^2.1"
   }
 }
