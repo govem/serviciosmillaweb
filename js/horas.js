@@ -40,7 +40,7 @@ $('input,select')
       }
 
       $.ajax({
-        url: 'http://34.220.31.60/serviciosmilla/mail/pedir_hora.php',
+        url: 'http://18.213.83.14/serviciosmilla/mail/pedir_hora.php',
         type: 'POST',
         dataType: 'text',
         crossDomain: true,
